@@ -36,18 +36,58 @@ const Hero = () => {
       const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
 
       tl.fromTo(heroRef.current, { opacity: 0 }, { opacity: 1, duration: 0.6 })
-  .fromTo(titleRef.current, { y: 50, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8 }, "-=0.2")
-  .fromTo(descRef.current, { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7 }, "-=0.4")
-  .fromTo(buttonRef.current, { scale: 0.8, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.6 }, "-=0.3")
-  .fromTo(rightWidgetsRef.current, { x: 50, opacity: 0 }, { x: 0, opacity: 1, duration: 0.8 }, "-=0.5")
-  .fromTo(cardRef.current, { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7 }, "-=0.5")
-  .fromTo(bottomCardRef.current, { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7 }, "-=0.6")
-  .fromTo(
-    mainButtonRef.current,
-    { scale: 0, rotation: -180, opacity: 0 },
-    { scale: 1, rotation: 0, opacity: 1, duration: 1, ease: "elastic.out(1,0.5)" },
-    "-=0.4"
-  );
+        .fromTo(
+          titleRef.current,
+          { y: 50, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.8 },
+          "-=0.2"
+        )
+        .fromTo(
+          descRef.current,
+          { y: 30, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.7 },
+          "-=0.4"
+        )
+        .fromTo(
+          buttonRef.current,
+          { scale: 0.8, opacity: 0 },
+          { scale: 1, opacity: 1, duration: 0.6, ease: "back.out(1.7)" },
+          "-=0.3"
+        )
+
+        // Right widgets — smoother entrance with slight slide + stagger
+        .fromTo(
+          rightWidgetsRef.current,
+          { x: 60, opacity: 0 },
+          { x: 0, opacity: 1, duration: 1, ease: "power4.out" },
+          "-=0.5"
+        )
+        .fromTo(
+          cardRef.current,
+          { y: 40, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.8, ease: "power4.out" },
+          "-=0.7"
+        )
+        .fromTo(
+          bottomCardRef.current,
+          { y: 40, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.8, ease: "power4.out" },
+          "-=0.6"
+        )
+
+        // Bottom arrow button — scale + bounce + rotation
+        .fromTo(
+          mainButtonRef.current,
+          { scale: 0.3, opacity: 0 },
+          {
+            scale: 1,
+            rotation: 0,
+            opacity: 1,
+            duration: 0.5,
+            ease: "elastic.out(1,0.5)",
+          },
+          "-=0.5"
+        );
     });
 
     return () => ctx.revert();
@@ -55,7 +95,10 @@ const Hero = () => {
 
   return (
     <section className="relative w-full bg-gray-100 px-6 py-8 md:px-16 md:py-12">
-      <div ref={heroRef} className="bg-gray-300 h-full min-h-[500px] rounded-2xl">
+      <div
+        ref={heroRef}
+        className="bg-gray-300 h-full min-h-[500px] rounded-2xl"
+      >
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 h-full">
           {/* Left Content */}
           <div className="col-span-1 md:col-span-2 bg-gray-300 rounded-3xl p-10 md:p-12 relative overflow-hidden h-full">
@@ -77,10 +120,7 @@ const Hero = () => {
 
             <div className="flex">
               {/* Description */}
-              <p
-                ref={descRef}
-                className="text-white opacity-90 max-w-lg mb-8"
-              >
+              <p ref={descRef} className="text-white opacity-90 max-w-lg mb-8">
                 {heroContent.description}
               </p>
 
