@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { ArrowUpRight } from "lucide-react";
+import gsap from "gsap";
 
 const Hero = () => {
   // ========== EASY EDIT SECTION - CUSTOMIZE HERE ==========
@@ -27,9 +28,85 @@ const Hero = () => {
 
   // ========== END EASY EDIT SECTION ==========
 
+  // GSAP Animation Refs
+  const heroRef = useRef(null);
+  const titleRef = useRef(null);
+  const descRef = useRef(null);
+  const buttonRef = useRef(null);
+  const cardRef = useRef(null);
+  const bottomCardRef = useRef(null);
+  const mainButtonRef = useRef(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Hero entrance animation
+      gsap.from(heroRef.current, {
+        opacity: 0,
+        duration: 0.5,
+        ease: "power2.out",
+      });
+
+      // Title animation
+      gsap.from(titleRef.current, {
+        y: 50,
+        opacity: 0,
+        duration: 0.8,
+        delay: 0.2,
+        ease: "power3.out",
+      });
+
+      // Description animation
+      gsap.from(descRef.current, {
+        y: 30,
+        opacity: 0,
+        duration: 0.8,
+        delay: 0.4,
+        ease: "power3.out",
+      });
+
+      // Button animation
+      gsap.from(buttonRef.current, {
+        scale: 0.8,
+        opacity: 0,
+        duration: 0.6,
+        delay: 0.6,
+        ease: "back.out(1.7)",
+      });
+
+      // Card animation
+      gsap.from(cardRef.current, {
+        x: 50,
+        opacity: 0,
+        duration: 0.8,
+        delay: 0.3,
+        ease: "power3.out",
+      });
+
+      // Bottom card animation
+      gsap.from(bottomCardRef.current, {
+        y: 30,
+        opacity: 0,
+        duration: 0.8,
+        delay: 0.5,
+        ease: "power3.out",
+      });
+
+      // Main button animation
+      gsap.from(mainButtonRef.current, {
+        scale: 0,
+        rotation: -180,
+        duration: 1,
+        delay: 0.7,
+        ease: "elastic.out(1, 0.5)",
+      });
+    });
+
+    return () => ctx.revert();
+  }, []);
+
   return (
     <section className="relative w-full bg-gray-100 px-6 py-8 md:px-16 md:py-12">
-      <div className="bg-gray-300 h-full min-h-[500px] rounded-2xl">
+      <div ref={heroRef} className="bg-gray-300 h-full min-h-[500px] rounded-2xl">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 h-full">
           {/* Left Content */}
           <div className="col-span-1 md:col-span-2 bg-gray-300 rounded-3xl p-10 md:p-12 relative overflow-hidden h-full">
@@ -42,28 +119,35 @@ const Hero = () => {
             </div>
 
             {/* Title */}
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
+            <h1 ref={titleRef} className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
               {heroContent.title}
             </h1>
 
+            <div className="flex">
             {/* Description */}
-            <p className="text-white opacity-90 max-w-lg mb-8">
+            <p ref={descRef} className="text-white opacity-90 max-w-lg mb-8 ">
               {heroContent.description}
             </p>
 
             {/* CTA Button */}
             <a href={heroContent.buttonUrl}>
-              <button className="bg-white text-gray-700 font-medium px-8 py-3 rounded-full shadow-lg hover:bg-gray-50 transition">
+              <button ref={buttonRef} className="bg-white text-gray-700 font-medium px-8 py-3 rounded-full shadow-lg hover:bg-gray-50 hover:shadow-xl hover:scale-105 transition-all duration-300">
                 {heroContent.buttonText}
               </button>
             </a>
+            </div>
           </div>
 
           {/* Right Side Widgets */}
           <div className="flex flex-col gap-6 h-full justify-between">
-            {/* Top Card */}
-            <div className="bg-gray-200 rounded-2xl flex p-6 flex-col flex-1">
-              <div className="bg-teal-700 text-white rounded-3xl p-6 h-52 flex flex-col gap-4 shadow-lg flex-1">
+            {/* Single Container with Two Custom Height Cards Inside */}
+            <div className="bg-gray-200 rounded-2xl rounded-br-none rounded-tl-none flex flex-col  p-6 gap-4">
+              {/* Top Card */}
+              <div
+                ref={cardRef}
+                className={`bg-teal-700 text-white rounded-3xl p-6 flex flex-col gap-4 shadow-lg justify-between h-36 hover:shadow-2xl hover:scale-105 transition-all duration-300 cursor-pointer
+                `}
+              >
                 <h3 className="text-lg font-semibold leading-snug">
                   {globalCard.title}
                 </h3>
@@ -80,13 +164,19 @@ const Hero = () => {
                   <p className="text-2xl font-bold">{globalCard.count}</p>
                 </div>
               </div>
-              <div className="bg-gray-400 rounded-3xl h-28 mt-4"></div>
+
+              {/* Bottom Card */}
+              <div
+                ref={bottomCardRef}
+                className={`bg-gray-400 text-transparent rounded-3xl  h-36 hover:bg-gray-500 transition-all duration-300 cursor-pointer
+                `}
+              >hh</div>
             </div>
           </div>
 
           {/* btn */}
-          <div className="w-18 relative bg-gray-200 flex items-center justify-center h-full">
-            <div className="bg-teal-700 text-white p-5 rounded-full shadow-xl hover:scale-110 transition-transform cursor-pointer">
+          <div className="w-22 relative bg-gray-200 flex items-center p-3 rounded-2xl rounded-tl-none rounded-br-none justify-center h-full">
+            <div ref={mainButtonRef} className="bg-teal-700 text-white p-5 rounded-full shadow-xl hover:scale-110 hover:rotate-45 hover:shadow-2xl transition-all duration-300 cursor-pointer">
               <ArrowUpRight size={32} />
             </div>
           </div>
