@@ -31,63 +31,77 @@ const Hero = () => {
   const mainButtonRef = useRef(null);
   const rightWidgetsRef = useRef(null);
 
-  useEffect(() => {
+useEffect(() => {
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
 
-      tl.fromTo(heroRef.current, { opacity: 0 }, { opacity: 1, duration: 0.6 })
-        .fromTo(
-          titleRef.current,
-          { y: 50, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.8 },
-          "-=0.2"
-        )
-        .fromTo(
-          descRef.current,
-          { y: 30, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.7 },
-          "-=0.4"
-        )
-        .fromTo(
-          buttonRef.current,
-          { scale: 0.8, opacity: 0 },
-          { scale: 1, opacity: 1, duration: 0.6, ease: "back.out(1.7)" },
-          "-=0.3"
-        )
+      // --- 1. Header Elements (Initial Entrance) ---
+      tl.fromTo(
+        heroRef.current,
+        { opacity: 0 },
+        { opacity: 1, duration: 0.5 }
+      )
+      .fromTo(
+        titleRef.current,
+        { y: 60, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.8, ease: "power4.out" },
+        "-=0.3"
+      )
+      .fromTo(
+        descRef.current,
+        { y: 40, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.7 },
+        "-=0.6"
+      )
+      .fromTo(
+        [buttonRef.current,mainButtonRef.current],
+        { scale: 0.6, opacity: 0 },
+        { scale: 1, opacity: 1, duration: 0.6, ease: "back.out(1.8)" },
+        "-=0.5"
+      );
 
-        // Right widgets — smoother entrance with slight slide + stagger
-        .fromTo(
-          rightWidgetsRef.current,
-          { x: 60, opacity: 0 },
-          { x: 0, opacity: 1, duration: 1, ease: "power4.out" },
-          "-=0.5"
-        )
-        .fromTo(
-          cardRef.current,
-          { y: 40, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.8, ease: "power4.out" },
-          "-=0.7"
-        )
-        .fromTo(
-          bottomCardRef.current,
-          { y: 40, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.8, ease: "power4.out" },
-          "-=0.6"
-        )
+      // --- 2. Right Widgets (Initial Entrance) ---
+      tl.addLabel("widgetsIn", "-=0.7") 
 
-        // Bottom arrow button — scale + bounce + rotation
-        .fromTo(
-          mainButtonRef.current,
-          { scale: 0.3, opacity: 0 },
-          {
-            scale: 1,
-            rotation: 0,
-            opacity: 1,
-            duration: 0.5,
-            ease: "elastic.out(1,0.5)",
-          },
-          "-=0.5"
-        );
+      .fromTo(
+        rightWidgetsRef.current,
+        { x: 80, opacity: 0 },
+        { x: 0, opacity: 1, duration: 1, ease: "power4.out" },
+        "widgetsIn"
+      )
+      // Cards fade in at their final position
+      .fromTo(
+        [cardRef.current, bottomCardRef.current],
+        { opacity: 0 },
+        { opacity: 1, duration: 0.5, stagger: 0.1 },
+        "widgetsIn+=0.2"
+      );
+      
+      // 💥 GLOBAL SCALE-POP EFFECT 💥
+      // Wait a moment after everything settles
+      tl.addLabel("scalePopEffect", "+=0.2"); 
+      
+      // We target all elements that should "pop" here:
+      tl.to(
+        [
+          buttonRef.current,         // The header button
+          rightWidgetsRef.current,   // The right container
+          cardRef.current,           // The top card
+          bottomCardRef.current,      // The bottom card
+          mainButtonRef.current
+        ],
+        { 
+            // Scale is subtle: 1.02 means 2% bigger
+            scale: 1.02, 
+            duration: 0.2, 
+            ease: "sine.out", 
+            yoyo: true,         // Play forward (scale up) then backward (scale down)
+            repeat: 1,          // Only do the full pop once
+            stagger: 0.03       // A very fast, subtle stagger for a unified ripple effect
+        },
+        "scalePopEffect"
+      );
+      
     });
 
     return () => ctx.revert();
