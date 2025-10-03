@@ -3,15 +3,11 @@ import { ArrowUpRight } from "lucide-react";
 import gsap from "gsap";
 
 const Hero = () => {
-  // ========== EASY EDIT SECTION - CUSTOMIZE HERE ==========
-
-  // Brand Tag
   const brandTag = {
     name: "Veltour",
     subtitle: "Travel & Tourism Agency Website",
   };
 
-  // Hero Content
   const heroContent = {
     title: "Where Every Journey Feels Like Home",
     description:
@@ -20,15 +16,12 @@ const Hero = () => {
     buttonUrl: "#",
   };
 
-  // Right Side Card
   const globalCard = {
     title: "Your Gateway to Global Adventures",
     count: "10K+",
   };
 
-  // ========== END EASY EDIT SECTION ==========
-
-  // GSAP Animation Refs
+  // Refs
   const heroRef = useRef(null);
   const titleRef = useRef(null);
   const descRef = useRef(null);
@@ -36,69 +29,25 @@ const Hero = () => {
   const cardRef = useRef(null);
   const bottomCardRef = useRef(null);
   const mainButtonRef = useRef(null);
+  const rightWidgetsRef = useRef(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Hero entrance animation
-      gsap.from(heroRef.current, {
-        opacity: 0,
-        duration: 0.5,
-        ease: "power2.out",
-      });
+      const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
 
-      // Title animation
-      gsap.from(titleRef.current, {
-        y: 50,
-        opacity: 0,
-        duration: 0.8,
-        delay: 0.2,
-        ease: "power3.out",
-      });
-
-      // Description animation
-      gsap.from(descRef.current, {
-        y: 30,
-        opacity: 0,
-        duration: 0.8,
-        delay: 0.4,
-        ease: "power3.out",
-      });
-
-      // Button animation
-      gsap.from(buttonRef.current, {
-        scale: 0.8,
-        opacity: 0,
-        duration: 0.6,
-        delay: 0.6,
-        ease: "back.out(1.7)",
-      });
-
-      // Card animation
-      gsap.from(cardRef.current, {
-        x: 50,
-        opacity: 0,
-        duration: 0.8,
-        delay: 0.3,
-        ease: "power3.out",
-      });
-
-      // Bottom card animation
-      gsap.from(bottomCardRef.current, {
-        y: 30,
-        opacity: 0,
-        duration: 0.8,
-        delay: 0.5,
-        ease: "power3.out",
-      });
-
-      // Main button animation
-      gsap.from(mainButtonRef.current, {
-        scale: 0,
-        rotation: -180,
-        duration: 1,
-        delay: 0.7,
-        ease: "elastic.out(1, 0.5)",
-      });
+      tl.fromTo(heroRef.current, { opacity: 0 }, { opacity: 1, duration: 0.6 })
+  .fromTo(titleRef.current, { y: 50, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8 }, "-=0.2")
+  .fromTo(descRef.current, { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7 }, "-=0.4")
+  .fromTo(buttonRef.current, { scale: 0.8, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.6 }, "-=0.3")
+  .fromTo(rightWidgetsRef.current, { x: 50, opacity: 0 }, { x: 0, opacity: 1, duration: 0.8 }, "-=0.5")
+  .fromTo(cardRef.current, { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7 }, "-=0.5")
+  .fromTo(bottomCardRef.current, { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7 }, "-=0.6")
+  .fromTo(
+    mainButtonRef.current,
+    { scale: 0, rotation: -180, opacity: 0 },
+    { scale: 1, rotation: 0, opacity: 1, duration: 1, ease: "elastic.out(1,0.5)" },
+    "-=0.4"
+  );
     });
 
     return () => ctx.revert();
@@ -119,40 +68,49 @@ const Hero = () => {
             </div>
 
             {/* Title */}
-            <h1 ref={titleRef} className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
+            <h1
+              ref={titleRef}
+              className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6"
+            >
               {heroContent.title}
             </h1>
 
             <div className="flex">
-            {/* Description */}
-            <p ref={descRef} className="text-white opacity-90 max-w-lg mb-8 ">
-              {heroContent.description}
-            </p>
+              {/* Description */}
+              <p
+                ref={descRef}
+                className="text-white opacity-90 max-w-lg mb-8"
+              >
+                {heroContent.description}
+              </p>
 
-            {/* CTA Button */}
-            <a href={heroContent.buttonUrl}>
-              <button ref={buttonRef} className="bg-white text-gray-700 font-medium px-8 py-3 rounded-full shadow-lg hover:bg-gray-50 hover:shadow-xl hover:scale-105 transition-all duration-300">
-                {heroContent.buttonText}
-              </button>
-            </a>
+              {/* CTA Button */}
+              <a href={heroContent.buttonUrl}>
+                <button
+                  ref={buttonRef}
+                  className="bg-white text-gray-700 font-medium px-8 py-3 rounded-full shadow-lg hover:bg-gray-50 hover:shadow-xl hover:scale-105 transition-all duration-300"
+                >
+                  {heroContent.buttonText}
+                </button>
+              </a>
             </div>
           </div>
 
           {/* Right Side Widgets */}
-          <div className="flex flex-col gap-6 h-full justify-between">
-            {/* Single Container with Two Custom Height Cards Inside */}
-            <div className="bg-gray-200 rounded-2xl rounded-br-none rounded-tl-none flex flex-col  p-6 gap-4">
+          <div
+            ref={rightWidgetsRef}
+            className="flex flex-col gap-6 h-full justify-between"
+          >
+            <div className="bg-gray-200 rounded-2xl rounded-br-none rounded-tl-none flex flex-col p-6 gap-4">
               {/* Top Card */}
               <div
                 ref={cardRef}
-                className={`bg-teal-700 text-white rounded-3xl p-6 flex flex-col gap-4 shadow-lg justify-between h-36 hover:shadow-2xl hover:scale-105 transition-all duration-300 cursor-pointer
-                `}
+                className="bg-teal-700 text-white rounded-3xl p-6 flex flex-col gap-4 shadow-lg justify-between h-36 hover:shadow-2xl hover:scale-105 transition-all duration-300 cursor-pointer"
               >
                 <h3 className="text-lg font-semibold leading-snug">
                   {globalCard.title}
                 </h3>
                 <div className="flex items-center gap-3">
-                  {/* Avatar Circles */}
                   <div className="flex -space-x-2">
                     <span className="w-9 h-9 rounded-full bg-gray-200 border-2 border-white"></span>
                     <span className="w-9 h-9 rounded-full bg-gray-300 border-2 border-white"></span>
@@ -168,15 +126,19 @@ const Hero = () => {
               {/* Bottom Card */}
               <div
                 ref={bottomCardRef}
-                className={`bg-gray-400 text-transparent rounded-3xl  h-36 hover:bg-gray-500 transition-all duration-300 cursor-pointer
-                `}
-              >hh</div>
+                className="bg-gray-400 text-transparent rounded-3xl h-36 hover:bg-gray-500 transition-all duration-300 cursor-pointer"
+              >
+                hh
+              </div>
             </div>
           </div>
 
-          {/* btn */}
+          {/* Main Button */}
           <div className="w-22 relative bg-gray-200 flex items-center p-3 rounded-2xl rounded-tl-none rounded-br-none justify-center h-full">
-            <div ref={mainButtonRef} className="bg-teal-700 text-white p-5 rounded-full shadow-xl hover:scale-110 hover:rotate-45 hover:shadow-2xl transition-all duration-300 cursor-pointer">
+            <div
+              ref={mainButtonRef}
+              className="bg-teal-700 text-white p-5 rounded-full shadow-xl hover:scale-110 hover:rotate-45 hover:shadow-2xl transition-all duration-300 cursor-pointer"
+            >
               <ArrowUpRight size={32} />
             </div>
           </div>
