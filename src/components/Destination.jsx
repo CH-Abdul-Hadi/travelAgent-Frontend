@@ -22,7 +22,7 @@ export default function Destination() {
       name: "lake valley",
       rating: 4.3,
       price: 200,
-      image: ".lake.jpg",
+      image: "/lake.jpg",
     },
   ];
 
@@ -47,7 +47,10 @@ export default function Destination() {
               className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300"
             >
               {/* Image */}
-              <div className="bg-gray-300 h-64 w-full"></div>
+              <div
+                className="bg-gray-300 h-64 w-full bg-center bg-cover"
+                style={{ backgroundImage: `url('${destination.image}')` }}
+              ></div>
 
               {/* Content */}
               <div className="bg-teal-700 p-6">

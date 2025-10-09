@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import { ChevronLeft, ChevronRight, Star, Quote } from "lucide-react";
+import {
+  ChevronLeft,
+  ChevronRight,
+  Star,
+  Quote,
+  ArrowUpRight,
+} from "lucide-react";
 
 export default function Testimonial() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -31,6 +37,8 @@ export default function Testimonial() {
     },
   ];
 
+  const profileImage = ["/profile4.jpeg", "/profile5.jpeg", "/profile3.jpeg"];
+
   const nextSlide = () => {
     setCurrentIndex((prev) => (prev + 1) % testimonials.length);
   };
@@ -58,13 +66,20 @@ export default function Testimonial() {
             {/* Rating Badge */}
             <div className="flex items-center gap-3">
               <div className="flex gap-1">
-                {[...Array(5)].map((_, i) => (
-                  <div
-                    key={i}
-                    className="w-10 h-10 bg-gray-300 rounded-full"
-                  ></div>
+                {profileImage.map((item, i) => (
+                  <>
+                    <div
+                      key={i}
+                      className="w-10 h-10 bg-gray-300 rounded-full bg-center bg-cover"
+                      style={{ backgroundImage: `url('${item}')` }}
+                    ></div>
+                  </>
                 ))}
+                <span className="w-9 h-9 rounded-full bg-teal-700 border-2 border-teal-700 flex items-center justify-center">
+                  <ArrowUpRight size={16} className="text-gray-50" />
+                </span>
               </div>
+
               <div className="text-3xl font-bold text-gray-900">10K+</div>
             </div>
           </div>
