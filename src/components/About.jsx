@@ -24,7 +24,7 @@ export default function About() {
       <div className="relative">
         <div
           className="bg-gray-300 rounded-lg h-96 w-full bg-cover bg-center"
-          style={{ backgroundImage: "url('/beach3.jpeg')" }}
+          style={{ backgroundImage: "url('/beach3.jpg')" }}
         ></div>
       </div>
 

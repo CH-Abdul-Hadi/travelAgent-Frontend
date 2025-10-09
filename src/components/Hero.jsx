@@ -95,14 +95,11 @@ const Hero = () => {
   }, []);
 
   return (
-    <section
-      className="relative w-full bg-gray-100 px-6 py-8 md:px-16 md:py-12 "
-      
-    >
+    <section className="relative w-full bg-gray-100 px-6 py-8 md:px-16 md:py-12 ">
       <div
         ref={heroRef}
         className="bg-gray-300 h-full min-h-[500px] rounded-2xl bg-cover bg-center bg-opacity-70"
-        style={{ backgroundImage: "url('/beach1.jpeg')" }} 
+        style={{ backgroundImage: "url('/beach1.jpeg')" }}
       >
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 h-full">
           {/* Left Content */}
@@ -153,9 +150,18 @@ const Hero = () => {
                 </h3>
                 <div className="flex items-center gap-3">
                   <div className="flex -space-x-2">
-                    <span className="w-9 h-9 rounded-full bg-gray-200 border-2 border-white"></span>
-                    <span className="w-9 h-9 rounded-full bg-gray-300 border-2 border-white"></span>
-                    <span className="w-9 h-9 rounded-full bg-gray-400 border-2 border-white"></span>
+                    <span
+                      className="w-9 h-9 rounded-full bg-cover bg-center border-2 border-white"
+                      style={{ backgroundImage: "url('/profile1.jpeg')" }}
+                    ></span>
+                    <span
+                      className="w-9 h-9 rounded-full bg-cover bg-center border-2 border-white"
+                      style={{ backgroundImage: "url('/profile2.jpeg')" }}
+                    ></span>
+                    <span
+                      className="w-9 h-9 rounded-full bg-cover bg-center border-2 border-white"
+                      style={{ backgroundImage: "url('/profile3.jpeg')" }}
+                    ></span>
                     <span className="w-9 h-9 rounded-full bg-white border-2 border-white flex items-center justify-center">
                       <ArrowUpRight size={16} className="text-teal-700" />
                     </span>

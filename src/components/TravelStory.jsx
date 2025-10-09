@@ -7,17 +7,22 @@ export default function TravelStory() {
   const stories = [
     {
       id: 1,
-      image: "/beach2.jpeg",
+      image: "/cherry.jpg",
       title: "Tropical Escape",
     },
     {
       id: 2,
-      image: "/mount2.jpeg",
+      image: "/lake.jpg",
       title: "Mountain Adventure",
     },
     {
       id: 3,
-      image: "/beach1.jpeg",
+      image: "/mount4.jpeg",
+      title: "Seaside Journey",
+    },
+    {
+      id: 4,
+      image: "/great-wall.jpg",
       title: "Seaside Journey",
     },
   ];
@@ -133,7 +138,7 @@ export default function TravelStory() {
               <div className="md:col-span-3">
                 <div
                   className="bg-gray-300 rounded-lg h-32 w-full bg-center bg-cover"
-                  style={{ backgroundImage: "url('/beach2.jpeg')" }}
+                  style={{ backgroundImage: "url('/eiffiel.jpg')" }}
                 ></div>
               </div>
               <div className="md:col-span-6">

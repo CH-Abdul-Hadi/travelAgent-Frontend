@@ -1,29 +1,29 @@
-import React from 'react';
-import { Star } from 'lucide-react';
+import React from "react";
+import { Star } from "lucide-react";
 
 export default function Destination() {
   const destinations = [
     {
       id: 1,
-      name: "Name Destination",
+      name: "china cherry blossom park",
       rating: 4.8,
       price: 200,
-      image: ""
+      image: "/cherry.jpg",
     },
     {
       id: 2,
-      name: "Name Destination",
-      rating: 4.8,
-      price: 200,
-      image: ""
+      name: "china great wall",
+      rating: 4.5,
+      price: 150,
+      image: "/great-wall.jpg",
     },
     {
       id: 3,
-      name: "Name Destination",
-      rating: 4.8,
+      name: "lake valley",
+      rating: 4.3,
       price: 200,
-      image: ""
-    }
+      image: ".lake.jpg",
+    },
   ];
 
   return (
@@ -42,13 +42,13 @@ export default function Destination() {
         {/* Destination Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {destinations.map((destination) => (
-            <div 
+            <div
               key={destination.id}
               className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300"
             >
               {/* Image */}
               <div className="bg-gray-300 h-64 w-full"></div>
-              
+
               {/* Content */}
               <div className="bg-teal-700 p-6">
                 <div className="flex items-start justify-between mb-4">
@@ -62,7 +62,7 @@ export default function Destination() {
                     <Star className="w-4 h-4 text-white fill-white" />
                   </div>
                 </div>
-                
+
                 <div className="flex items-center justify-between">
                   <button className="bg-white hover:bg-gray-100 text-teal-700 font-medium px-6 py-2 rounded-full transition-colors">
                     Book Now
