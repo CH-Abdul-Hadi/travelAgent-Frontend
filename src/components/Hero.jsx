@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { ArrowUpRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import gsap from "gsap";
 
 const Hero = () => {
   const brandTag = {
@@ -31,8 +32,142 @@ const Hero = () => {
   const mainButtonRef = useRef(null);
   const rightWidgetsRef = useRef(null);
 
+  useEffect(() => {
+    let handleMainEnter, handleMainLeave;
+    let handleGetEnter, handleGetLeave;
+
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+
+      // --- 1. Intro Animation ---
+      tl.fromTo(heroRef.current, { opacity: 0 }, { opacity: 1, duration: 0.5 })
+        .fromTo(
+          titleRef.current,
+          { y: 60, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.8, ease: "power4.out" },
+          "-=0.3"
+        )
+        .fromTo(
+          descRef.current,
+          { y: 40, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.7 },
+          "-=0.6"
+        )
+        .fromTo(
+          [buttonRef.current, mainButtonRef.current],
+          { scale: 0.6, opacity: 0 },
+          { scale: 1, opacity: 1, duration: 0.6, ease: "back.out(1.8)" },
+          "-=0.5"
+        );
+
+      // --- 2. Widgets In ---
+      tl.addLabel("widgetsIn", "-=0.7")
+        .fromTo(
+          rightWidgetsRef.current,
+          { x: 80, opacity: 0 },
+          { x: 0, opacity: 1, duration: 1, ease: "power4.out" },
+          "widgetsIn"
+        )
+        .fromTo(
+          [cardRef.current, bottomCardRef.current],
+          { opacity: 0 },
+          { opacity: 1, duration: 0.5, stagger: 0.1 },
+          "widgetsIn+=0.2"
+        );
+
+      // --- 3. Scale Pop ---
+      tl.addLabel("scalePopEffect", "+=0.2").to(
+        [
+          buttonRef.current,
+          rightWidgetsRef.current,
+          cardRef.current,
+          bottomCardRef.current,
+          mainButtonRef.current,
+        ],
+        {
+          scale: 1.02,
+          duration: 0.2,
+          ease: "sine.out",
+          yoyo: true,
+          repeat: 1,
+          stagger: 0.03,
+        },
+        "scalePopEffect"
+      );
+
+      // === Hover Animations with GSAP ===
+      // Main round button
+      handleMainEnter = () => {
+        gsap.to(mainButtonRef.current, {
+          scale: 1.12,
+          rotation: 45,
+          duration: 0.3,
+          ease: "power2.out",
+        });
+      };
+      handleMainLeave = () => {
+        gsap.to(mainButtonRef.current, {
+          scale: 1,
+          rotation: 0,
+          duration: 0.3,
+          ease: "power2.out",
+        });
+      };
+
+      // Get Started button
+      handleGetEnter = () => {
+        gsap.to(buttonRef.current, {
+          scale: 1.08,
+          boxShadow: "0 10px 20px rgba(0,0,0,0.15)",
+          duration: 0.25,
+          ease: "power2.out",
+        });
+      };
+      handleGetLeave = () => {
+        gsap.to(buttonRef.current, {
+          scale: 1,
+          boxShadow: "0 4px 10px rgba(0,0,0,0.1)",
+          duration: 0.25,
+          ease: "power2.out",
+        });
+      };
+
+      // Attach listeners
+      if (mainButtonRef.current) {
+        mainButtonRef.current.addEventListener("pointerenter", handleMainEnter);
+        mainButtonRef.current.addEventListener("pointerleave", handleMainLeave);
+      }
+      if (buttonRef.current) {
+        buttonRef.current.addEventListener("pointerenter", handleGetEnter);
+        buttonRef.current.addEventListener("pointerleave", handleGetLeave);
+      }
+    });
+
+    // Cleanup
+    return () => {
+      if (mainButtonRef.current) {
+        mainButtonRef.current.removeEventListener(
+          "pointerenter",
+          handleMainEnter
+        );
+        mainButtonRef.current.removeEventListener(
+          "pointerleave",
+          handleMainLeave
+        );
+      }
+      if (buttonRef.current) {
+        buttonRef.current.removeEventListener("pointerenter", handleGetEnter);
+        buttonRef.current.removeEventListener("pointerleave", handleGetLeave);
+      }
+      ctx.revert();
+    };
+  }, []);
+
   return (
-    <section className="relative w-full bg-gray-100 px-4 py-6 sm:px-6 sm:py-8 md:px-16 md:py-12" id="home">
+    <section
+      className="relative w-full bg-gray-100 px-4 py-6 sm:px-6 sm:py-8 md:px-16 md:py-12"
+      id="home"
+    >
       <div
         ref={heroRef}
         className="bg-gray-300 h-full min-h-[500px] rounded-2xl bg-cover bg-center bg-opacity-70"
@@ -45,7 +180,9 @@ const Hero = () => {
               <span className="bg-white text-gray-800 px-3 sm:px-4 py-1.5 rounded-full text-xs font-semibold shadow">
                 {brandTag.name}
               </span>
-              <span className="opacity-90 text-xs sm:text-sm">{brandTag.subtitle}</span>
+              <span className="opacity-90 text-xs sm:text-sm">
+                {brandTag.subtitle}
+              </span>
             </div>
 
             <h1
@@ -56,7 +193,6 @@ const Hero = () => {
             </h1>
 
             <div className="flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-6">
-
               <p
                 ref={descRef}
                 className="text-teal-900 opacity-90 max-w-lg mb-4 md:mb-8 text-sm sm:text-base"
@@ -64,13 +200,12 @@ const Hero = () => {
                 {heroContent.description}
               </p>
               <Link to="/get-in-touch">
-              <button
-                ref={buttonRef}
-                className="bg-white text-gray-700 font-medium sm:px-8 !py-[8px] outline-none rounded-full shadow-lg hover:bg-gray-50 hover:shadow-xl hover:scale-105 transition-all duration-300 self-start md:self-auto"
-
-              >
-                {heroContent.buttonText}
-              </button>
+                <button
+                  ref={buttonRef}
+                  className="bg-white text-gray-700 font-medium px-6 sm:px-8 py-[8px] outline-none rounded-full shadow-lg transition-all duration-300 self-start md:self-auto"
+                >
+                  {heroContent.buttonText}
+                </button>
               </Link>
             </div>
           </div>
@@ -107,7 +242,9 @@ const Hero = () => {
                       <ArrowUpRight size={16} className="text-teal-700" />
                     </span>
                   </div>
-                  <p className="text-xl sm:text-2xl font-bold">{globalCard.count}</p>
+                  <p className="text-xl sm:text-2xl font-bold">
+                    {globalCard.count}
+                  </p>
                 </div>
               </div>
 
@@ -121,10 +258,10 @@ const Hero = () => {
           </div>
 
           {/* Main Button */}
-          <div className="w-20 sm:w-22 relative bg-gray-100 flex items-center p-3 rounded-2xl rounded-tl-none rounded-br-none justify-center h-full">
+          <div className="hidden lg:flex w-20 relative bg-gray-100 items-center p-3 rounded-2xl rounded-tl-none rounded-br-none justify-center h-full">
             <div
               ref={mainButtonRef}
-              className="bg-teal-700 text-white p-4 sm:p-5 rounded-full shadow-xl hover:scale-110 hover:rotate-45 hover:shadow-2xl transition-all duration-300 cursor-pointer"
+              className="bg-teal-700 text-white p-4 sm:p-5 rounded-full shadow-xl transition-all duration-300 cursor-pointer"
             >
               <ArrowUpRight size={32} />
             </div>
