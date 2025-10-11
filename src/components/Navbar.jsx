@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { FaTwitter, FaInstagram, FaFacebook, FaTelegram, FaBars, FaTimes } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   // ========== EASY EDIT SECTION - CUSTOMIZE HERE ==========
@@ -26,11 +27,11 @@ const Navbar = () => {
 
   // Navigation Menu Items
   const navItems = [
-    { name: "Home", url: "#" },
-    { name: "About Us", url: "#" },
-    { name: "Benefit", url: "#" },
-    { name: "Course", url: "#" },
-    { name: "FAQs", url: "#" }
+    { name: "Home", url: "#home" },
+    { name: "About Us", url: "#about" },
+    { name: "Stories", url: "#stories" },
+    { name: "Destination", url: "#destination" },
+    { name: "Testimonial", url: "#testimonial" }
   ];
 
   // Call to Action Button
@@ -87,11 +88,12 @@ const Navbar = () => {
             </a>
           ))}
 
-          <a href={ctaButton.url}>
+         <Link to="/get-in-touch">
             <button className="ml-4 bg-teal-700 text-white px-4 py-2 rounded-full hover:bg-teal-800 transition-colors">
               {ctaButton.text}
             </button>
-          </a>
+            </Link>
+          
         </nav>
 
         {/* Mobile menu button */}

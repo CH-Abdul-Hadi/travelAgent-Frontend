@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export default function TravelStory() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -28,7 +29,7 @@ export default function TravelStory() {
   ];
 
   return (
-    <div className="min-h-screen bg-white py-16 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-white py-16 px-4 sm:px-6 lg:px-8" id="stories">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-12">
@@ -46,19 +47,19 @@ export default function TravelStory() {
                 <div className="text-4xl md:text-5xl font-bold text-gray-900 mb-2">
                   20+
                 </div>
-                <div className="text-sm text-gray-600">Lorem Ipsum Dolot</div>
+                <div className="text-sm text-gray-600">Years of Experience</div>
               </div>
               <div>
                 <div className="text-4xl md:text-5xl font-bold text-gray-900 mb-2">
                   910+
                 </div>
-                <div className="text-sm text-gray-600">Lorem Ipsum Dolot</div>
+                <div className="text-sm text-gray-600">Exotic Destinations</div>
               </div>
               <div>
                 <div className="text-4xl md:text-5xl font-bold text-gray-900 mb-2">
                   45K+
                 </div>
-                <div className="text-sm text-gray-600">Lorem Ipsum Dolot</div>
+                <div className="text-sm text-gray-600">Happy Travelers</div>
               </div>
             </div>
           </div>
@@ -82,12 +83,16 @@ export default function TravelStory() {
                 Special Since Day One
               </h2>
               <p className="text-gray-600 mb-6">
-                Lorem ipsum dolor sit amet, cectetur adipiscing elit, sed do
-                eiusm tempor incididunt ut labore
+                From serene mountain getaways to vibrant city escapes, we craft
+                personalized travel experiences that leave lasting memories. Our
+                team ensures every journey is comfortable, safe, and filled with
+                unforgettable moments.
               </p>
+              <Link to="get-in-touch">
               <button className="bg-teal-700 hover:bg-teal-800 text-white font-medium px-6 py-3 rounded-full transition-colors">
                 Get in touch
               </button>
+              </Link>
             </div>
           </div>
 
@@ -133,29 +138,30 @@ export default function TravelStory() {
         {/* Story Cards */}
         <div className="bg-teal-700 rounded-2xl w-[53rem] bottom-30 p-8 md:p-12 relative overflow-hidden">
           <div className="relative z-10 space-y-8">
-            {/* Story Card 1 */}
+            {/* Story Card 1 - updated structure */}
             <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center pb-8 border-b border-teal-600">
-              <div className="md:col-span-3">
+              <div className="md:col-span-3 order-2 md:order-1">
                 <div
                   className="bg-gray-300 rounded-lg h-32 w-full bg-center bg-cover"
                   style={{ backgroundImage: "url('/eiffiel.jpg')" }}
                 ></div>
               </div>
-              <div className="md:col-span-6">
+              <div className="md:col-span-6 order-3 md:order-2">
                 <h3 className="text-2xl font-bold text-white mb-3">
                   The Story Behind Veltour
                 </h3>
                 <p className="text-teal-100">
-                  Lorem ipsum dolor sit amet, cectetur adipiscing elit, sed do
-                  eiusm tempor incididunt ut labore
+                  Discover how Veltour began its journey of turning wanderlust
+                  into reality. We started with one mission — to make global
+                  travel simple, joyful, and accessible to everyone.
                 </p>
-              </div>
-              <div className="md:col-span-3 flex justify-between items-center md:justify-end md:gap-8">
-                <div className="text-6xl font-bold text-white">01</div>
-                <button className="text-white hover:text-teal-200 transition-colors flex items-center gap-2">
+                <button className="text-white hover:text-teal-200 transition-colors flex items-center gap-2 mt-4">
                   <span className="font-medium">Read More</span>
                   <ArrowRight className="w-5 h-5" />
                 </button>
+              </div>
+              <div className="md:col-span-3 order-1 md:order-3">
+                <div className="text-6xl font-bold text-white">01</div>
               </div>
             </div>
 
@@ -169,8 +175,9 @@ export default function TravelStory() {
                   The Story Behind Veltour
                 </h3>
                 <p className="text-teal-100">
-                  Lorem ipsum dolor sit amet, cectetur adipiscing elit, sed do
-                  eiusm tempor incididunt ut labore
+                  Over the years, we’ve connected thousands of travelers to the
+                  world’s most stunning destinations. Join us as we continue to
+                  explore, inspire, and redefine the way you travel.
                 </p>
                 <button className="text-white hover:text-teal-200 transition-colors flex items-center gap-2 mt-4">
                   <span className="font-medium">Read More</span>

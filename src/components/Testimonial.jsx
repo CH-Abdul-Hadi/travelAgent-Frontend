@@ -13,26 +13,18 @@ export default function Testimonial() {
   const testimonials = [
     {
       id: 1,
-      name: "Your Name",
-      title: "Jarket Modern",
+      name: "Jarina Patel",
+      title: "Honeymoon & Luxury",
       review:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",
+        "Veltour made our dream honeymoon to the Maldives absolutely perfect! Every detail was flawlessly arranged, and the experience exceeded all our expectations. We couldn't be happier!",
       rating: 5,
     },
     {
       id: 2,
-      name: "Your Name",
-      title: "Jarket ",
+      name: "Alex Thompson",
+      title: "Solo & Adventure",
       review:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",
-      rating: 5,
-    },
-    {
-      id: 3,
-      name: "Your Name",
-      title: "Jack",
-      review:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",
+        "Booking my solo adventure through Southeast Asia with Veltour was the best decision! Their local guides were incredible, and the itinerary was perfectly balanced between culture and adventure. Highly recommended!",
       rating: 5,
     },
   ];
@@ -50,37 +42,40 @@ export default function Testimonial() {
   };
 
   return (
-    <div className="min-h-screen bg-white py-16 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-white py-16 px-4 sm:px-6 lg:px-8" id="testimonial">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-12">
           <p className="text-sm text-gray-500 uppercase tracking-wide mb-4">
-            Travel & Tourism Agency Website
+            Travel & Tourism Agency
           </p>
           <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 max-w-2xl">
               From Booking to Boarding
-              <br />- Excellence All the Way
+              <br />– Excellence All the Way
             </h1>
 
             {/* Rating Badge */}
             <div className="flex items-center gap-3">
               <div className="flex gap-1">
                 {profileImage.map((item, i) => (
-                  <>
-                    <div
-                      key={i}
-                      className="w-10 h-10 bg-gray-300 rounded-full bg-center bg-cover"
-                      style={{ backgroundImage: `url('${item}')` }}
-                    ></div>
-                  </>
+                  <div
+                    key={i}
+                    className="w-10 h-10 bg-gray-300 rounded-full bg-center bg-cover"
+                    style={{ backgroundImage: `url('${item}')` }}
+                  ></div>
                 ))}
                 <span className="w-9 h-9 rounded-full bg-teal-700 border-2 border-teal-700 flex items-center justify-center">
                   <ArrowUpRight size={16} className="text-gray-50" />
                 </span>
               </div>
 
-              <div className="text-3xl font-bold text-gray-900">10K+</div>
+              <div className="text-3xl font-bold text-gray-900">
+                10K+
+                <span className="text-sm text-gray-600 ml-1">
+                  Satisfied Clients
+                </span>
+              </div>
             </div>
           </div>
         </div>
@@ -92,6 +87,7 @@ export default function Testimonial() {
             <div
               className="bg-gray-300 rounded-2xl h-96 lg:h-full bg-center bg-cover"
               style={{ backgroundImage: "url('/beach5.jpg')" }}
+              aria-label="Tropical luxury vacation scene"
             ></div>
           </div>
 
@@ -102,7 +98,7 @@ export default function Testimonial() {
               <div className="flex gap-6 overflow-hidden">
                 {testimonials
                   .slice(currentIndex, currentIndex + 2)
-                  .map((testimonial, idx) => (
+                  .map((testimonial) => (
                     <div
                       key={testimonial.id}
                       className="flex-shrink-0 w-full lg:w-[calc(50%-12px)] bg-gray-100 rounded-2xl p-8 relative"

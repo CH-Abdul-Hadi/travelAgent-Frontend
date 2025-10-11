@@ -1,5 +1,6 @@
 import React from "react";
 import { Star } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export default function Destination() {
   const destinations = [
@@ -27,7 +28,7 @@ export default function Destination() {
   ];
 
   return (
-    <div className="min-h-screen bg-white py-16 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-white py-16 px-4 sm:px-6 lg:px-8" id="destination">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12">
@@ -67,9 +68,12 @@ export default function Destination() {
                 </div>
 
                 <div className="flex items-center justify-between">
+              <Link to="/get-in-touch">
+
                   <button className="bg-white hover:bg-gray-100 text-teal-700 font-medium px-6 py-2 rounded-full transition-colors">
                     Book Now
                   </button>
+                  </Link>
                   <div className="text-white text-2xl font-bold">
                     ${destination.price}
                   </div>

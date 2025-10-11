@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { ArrowUpRight } from "lucide-react";
 import gsap from "gsap";
+import { Link } from "react-router-dom";
 
 const Hero = () => {
   const brandTag = {
@@ -11,7 +12,7 @@ const Hero = () => {
   const heroContent = {
     title: "Where Every Journey Feels Like Home",
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut lab",
+      "At Veltour, we craft unforgettable journeys with expert planning, personalized service, and a passion for exploration — making every trip seamless and memorable.",
     buttonText: "Get Started",
     buttonUrl: "#",
   };
@@ -95,7 +96,7 @@ const Hero = () => {
   }, []);
 
   return (
-    <section className="relative w-full bg-gray-100 px-6 py-8 md:px-16 md:py-12 ">
+    <section className="relative w-full bg-gray-100 px-6 py-8 md:px-16 md:py-12" id="home">
       <div
         ref={heroRef}
         className="bg-gray-300 h-full min-h-[500px] rounded-2xl bg-cover bg-center bg-opacity-70"
@@ -113,24 +114,27 @@ const Hero = () => {
 
             <h1
               ref={titleRef}
-              className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6"
+              className="text-4xl md:text-5xl lg:text-6xl font-bold text-teal-700 leading-tight mb-6"
             >
               {heroContent.title}
             </h1>
 
             <div className="flex">
-              <p ref={descRef} className="text-white opacity-90 max-w-lg mb-8">
+              <p
+                ref={descRef}
+                className="text-teal-900 opacity-90 max-w-lg mb-8"
+              >
                 {heroContent.description}
               </p>
 
-              <a href={heroContent.buttonUrl}>
+              <Link to="/get-in-touch">
                 <button
                   ref={buttonRef}
                   className="bg-white text-gray-700 font-medium px-8 py-3 rounded-full shadow-lg hover:bg-gray-50 hover:shadow-xl hover:scale-105 transition-all duration-300"
                 >
                   {heroContent.buttonText}
                 </button>
-              </a>
+              </Link>
             </div>
           </div>
 
@@ -181,12 +185,14 @@ const Hero = () => {
 
           {/* Main Button */}
           <div className="w-22 relative bg-gray-100 flex items-center p-3 rounded-2xl rounded-tl-none rounded-br-none justify-center h-full">
-            <div
-              ref={mainButtonRef}
-              className="bg-teal-700 text-white p-5 rounded-full shadow-xl hover:scale-110 hover:rotate-45 hover:shadow-2xl transition-all duration-300 cursor-pointer"
-            >
-              <ArrowUpRight size={32} />
-            </div>
+            <Link to="/get-in-touch">
+              <div
+                ref={mainButtonRef}
+                className="bg-teal-700 text-white p-5 rounded-full shadow-xl hover:scale-110 hover:rotate-45 hover:shadow-2xl transition-all duration-300 cursor-pointer"
+              >
+                <ArrowUpRight size={32} />
+              </div>
+            </Link>
           </div>
         </div>
       </div>

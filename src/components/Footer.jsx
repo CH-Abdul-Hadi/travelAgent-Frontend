@@ -1,38 +1,32 @@
 import React, { useState } from "react";
-import { Play, Facebook, Twitter, Instagram } from "lucide-react";
+import { Play, Facebook, Twitter, Instagram, Linkedin } from "lucide-react";
 
 export default function Footer() {
   const [isPlaying, setIsPlaying] = useState(false);
 
   const footerLinks = [
     {
-      title: "Our links",
+      title: "Quick Links",
+      links: ["Home", "Destination", "Stories", "About"],
+    },
+    {
+      title: "Resources",
       links: [
-        "Lorem Ipsum",
-        "Lorem our Ipsum",
-        "Our Lorem",
-        "Loremipjs",
-        "Lorem Ipsum",
+        "Blog",
+        "FAQ",
+        "Privacy Policy",
+        "Terms & Conditions",
+        "Support",
       ],
     },
     {
-      title: "Our links",
+      title: "Popular Tours",
       links: [
-        "Lorem Ipsum",
-        "Lorem our Ipsum",
-        "Our Lorem",
-        "Loremipjs",
-        "Lorem Ipsum",
-      ],
-    },
-    {
-      title: "Our links",
-      links: [
-        "Lorem Ipsum",
-        "Lorem our Ipsum",
-        "Our Lorem",
-        "Loremipjs",
-        "Lorem Ipsum",
+        "European Grand Tour",
+        "Asian Escapes",
+        "African Safaris",
+        "Cruise Adventures",
+        "Adventure Treks",
       ],
     },
   ];
@@ -41,7 +35,7 @@ export default function Footer() {
     <div className="bg-white">
       {/* Video Section */}
       <div
-        className="relative bg-center bg-cover h-96 flex items-center justify-center "
+        className="relative bg-center bg-cover h-96 flex items-center justify-center"
         style={{ backgroundImage: "url('/vidThumb.png')" }}
       >
         {!isPlaying && (
@@ -75,7 +69,7 @@ export default function Footer() {
         )}
       </div>
 
-      {/*  */}
+      {/* Footer */}
       <footer className="bg-teal-700 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           {/* Main Footer Content */}
@@ -85,19 +79,28 @@ export default function Footer() {
               <h2 className="text-4xl font-bold mb-2">Veltour</h2>
               <p className="text-teal-200 mb-8">Travel & Tour</p>
 
-              {/* Social Media Placeholders */}
+              {/* Small Gallery */}
               <div className="flex gap-4 mb-8">
                 <div
                   className="w-16 h-16 bg-gray-200 rounded bg-cover bg-center"
-                  style={{ backgroundImage: "url('/vidThumb.png')" }}
+                  style={{
+                    backgroundImage: "url('/mount1.jpeg')",
+                  }}
+                  aria-label="Snow-capped mountains trekking"
                 ></div>
                 <div
                   className="w-16 h-16 bg-gray-200 rounded bg-cover bg-center"
-                  style={{ backgroundImage: "url('/cherry.jpg')" }}
+                  style={{
+                    backgroundImage: "url('/cherry.jpg')",
+                  }}
+                  aria-label="Cherry blossoms with traditional pagoda"
                 ></div>
                 <div
                   className="w-16 h-16 bg-gray-200 rounded bg-cover bg-center"
-                  style={{ backgroundImage: "url('/mount5.jpeg')" }}
+                  style={{
+                    backgroundImage: "url('/great-wall.jpg')",
+                  }}
+                  aria-label="Lush green forest national park"
                 ></div>
               </div>
 
@@ -105,13 +108,6 @@ export default function Footer() {
               <div>
                 <h3 className="text-lg font-semibold mb-4">Follow Us</h3>
                 <div className="flex gap-3">
-                  <a
-                    href="#"
-                    className="w-10 h-10 bg-white hover:bg-gray-100 rounded-full flex items-center justify-center transition-colors"
-                    aria-label="Pinterest"
-                  >
-                    <div className="w-5 h-5 bg-teal-700 rounded-full"></div>
-                  </a>
                   <a
                     href="#"
                     className="w-10 h-10 bg-white hover:bg-gray-100 rounded-full flex items-center justify-center transition-colors"
@@ -133,6 +129,13 @@ export default function Footer() {
                   >
                     <Facebook className="w-5 h-5 text-teal-700" />
                   </a>
+                  <a
+                    href="#"
+                    className="w-10 h-10 bg-white hover:bg-gray-100 rounded-full flex items-center justify-center transition-colors"
+                    aria-label="LinkedIn"
+                  >
+                    <Linkedin className="w-5 h-5 text-teal-700" />
+                  </a>
                 </div>
               </div>
             </div>
@@ -145,7 +148,7 @@ export default function Footer() {
                   {column.links.map((link, linkIndex) => (
                     <li key={linkIndex}>
                       <a
-                        href="#"
+                        href={`#${link.toLowerCase()}`}
                         className="text-teal-200 hover:text-white transition-colors"
                       >
                         {link}
@@ -160,7 +163,7 @@ export default function Footer() {
           {/* Copyright */}
           <div className="border-t border-teal-600 pt-8 text-center">
             <p className="text-teal-200 text-sm">
-              Copyright © 2025 sanstive | Powered by sanstive
+              Copyright © 2025 Veltour | Powered by Sanstive
             </p>
           </div>
         </div>
