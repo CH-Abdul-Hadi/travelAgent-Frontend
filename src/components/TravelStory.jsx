@@ -1,38 +1,100 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function TravelStory() {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const sectionRef = useRef(null);
 
   const stories = [
-    {
-      id: 1,
-      image: "/cherry.jpg",
-      title: "Tropical Escape",
-    },
-    {
-      id: 2,
-      image: "/lake.jpg",
-      title: "Mountain Adventure",
-    },
-    {
-      id: 3,
-      image: "/mount4.jpeg",
-      title: "Seaside Journey",
-    },
-    {
-      id: 4,
-      image: "/great-wall.jpg",
-      title: "Seaside Journey",
-    },
+    { id: 1, image: "/cherry.jpg", title: "Tropical Escape" },
+    { id: 2, image: "/lake.jpg", title: "Mountain Adventure" },
+    { id: 3, image: "/mount4.jpeg", title: "Seaside Journey" },
+    { id: 4, image: "/great-wall.jpg", title: "Seaside Journey" },
   ];
 
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Header animation
+      gsap.from(".travel-header", {
+        opacity: 0,
+        y: 50,
+        duration: 1.2,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: ".travel-header",
+          start: "top 85%",
+        },
+      });
+
+      // Stats animation
+      gsap.from(".travel-stats > div", {
+        opacity: 0,
+        y: 40,
+        stagger: 0.2,
+        duration: 1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: ".travel-stats",
+          start: "top 85%",
+        },
+      });
+
+      // Grid animation (images and text)
+      gsap.from(".travel-grid > div", {
+        opacity: 0,
+        y: 60,
+        stagger: 0.3,
+        duration: 1.2,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: ".travel-grid",
+          start: "top 80%",
+        },
+      });
+
+      // Story cards animation
+      gsap.from(".travel-story-card", {
+        opacity: 0,
+        y: 80,
+        stagger: 0.3,
+        duration: 1.2,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: ".travel-story-card",
+          start: "top 90%",
+        },
+      });
+
+      // Background text subtle fade
+      gsap.from(".travel-bg-text", {
+        opacity: 0,
+        y: 100,
+        duration: 1.5,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: ".travel-bg-text",
+          start: "top 90%",
+        },
+      });
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <div className="min-h-screen bg-white py-8 sm:py-12 md:py-16 px-4 sm:px-6 lg:px-8" id="stories">
+    <div
+      ref={sectionRef}
+      className="min-h-screen bg-white py-8 sm:py-12 md:py-16 px-4 sm:px-6 lg:px-8"
+      id="stories"
+    >
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="mb-8 sm:mb-10 md:mb-12">
+        <div className="mb-8 sm:mb-10 md:mb-12 travel-header">
           <p className="text-xs sm:text-sm text-gray-900 uppercase tracking-wide mb-3 sm:mb-4 pl-2 sm:pl-4">
             Travel & Tourism Agency Website
           </p>
@@ -42,39 +104,46 @@ export default function TravelStory() {
             </h1>
 
             {/* Stats */}
-            <div className="flex gap-6 sm:gap-8 lg:gap-12 px-2 sm:px-0">
+            <div className="travel-stats flex gap-6 sm:gap-8 lg:gap-12 px-2 sm:px-0">
               <div>
                 <div className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-1 sm:mb-2">
                   20+
                 </div>
-                <div className="text-xs sm:text-sm text-gray-600">Years of Experience</div>
+                <div className="text-xs sm:text-sm text-gray-600">
+                  Years of Experience
+                </div>
               </div>
               <div>
                 <div className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-1 sm:mb-2">
                   910+
                 </div>
-                <div className="text-xs sm:text-sm text-gray-600">Exotic Destinations</div>
+                <div className="text-xs sm:text-sm text-gray-600">
+                  Exotic Destinations
+                </div>
               </div>
               <div>
                 <div className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-1 sm:mb-2">
                   45K+
                 </div>
-                <div className="text-xs sm:text-sm text-gray-600">Happy Travelers</div>
+                <div className="text-xs sm:text-sm text-gray-600">
+                  Happy Travelers
+                </div>
               </div>
             </div>
           </div>
         </div>
 
         {/* Main Content Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 mb-8 sm:mb-10 md:mb-12">
-          {/* Left Side - Image and CTA */}
+        <div className="travel-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 mb-8 sm:mb-10 md:mb-12">
+          {/* Left Side - Image */}
           <div className="space-y-4 sm:space-y-6">
             <div
               className="bg-gray-300 rounded-lg h-48 sm:h-56 md:h-full bg-center bg-cover"
               style={{ backgroundImage: "url('/mount2.jpeg')" }}
             ></div>
           </div>
-          {/* middle */}
+
+          {/* Middle Text Section */}
           <div className="space-y-3">
             <div className="bg-white">
               <h2 className="text-xl sm:text-2xl font-bold lg:pt-8 text-gray-900 mb-2 sm:mb-3">
@@ -89,14 +158,14 @@ export default function TravelStory() {
                 unforgettable moments.
               </p>
               <Link to="/get-in-touch">
-              <button className="bg-teal-700 hover:bg-teal-800 text-white font-medium px-5 sm:px-6 py-2.5 sm:py-3 rounded-full transition-colors text-sm sm:text-base">
-                Get in touch
-              </button>
+                <button className="bg-teal-700 hover:bg-teal-800 text-white font-medium px-5 sm:px-6 py-2.5 sm:py-3 rounded-full transition-colors text-sm sm:text-base">
+                  Get in touch
+                </button>
               </Link>
             </div>
           </div>
 
-          {/* Right Side - Large Image with Navigation */}
+          {/* Right Side - Image Slider */}
           <div className="space-y-3 md:col-span-2 lg:col-span-1">
             <div className="relative">
               <div
@@ -111,7 +180,9 @@ export default function TravelStory() {
                 <button
                   onClick={() =>
                     setCurrentSlide(
-                      currentSlide === 0 ? stories.length - 1 : currentSlide - 1
+                      currentSlide === 0
+                        ? stories.length - 1
+                        : currentSlide - 1
                     )
                   }
                   className="w-10 h-10 sm:w-12 sm:h-12 bg-white hover:bg-gray-100 rounded-full flex items-center justify-center shadow-lg transition-colors"
@@ -122,7 +193,9 @@ export default function TravelStory() {
                 <button
                   onClick={() =>
                     setCurrentSlide(
-                      currentSlide === stories.length - 1 ? 0 : currentSlide + 1
+                      currentSlide === stories.length - 1
+                        ? 0
+                        : currentSlide + 1
                     )
                   }
                   className="w-10 h-10 sm:w-12 sm:h-12 bg-teal-700 hover:bg-teal-800 rounded-full flex items-center justify-center shadow-lg transition-colors"
@@ -138,8 +211,8 @@ export default function TravelStory() {
         {/* Story Cards */}
         <div className="bg-teal-700 rounded-2xl w-full max-w-full lg:max-w-[53rem] p-6 sm:p-8 md:p-12 relative overflow-hidden">
           <div className="relative z-10 space-y-6 sm:space-y-8">
-            {/* Story Card 1 - updated structure */}
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-4 sm:gap-6 items-center pb-6 sm:pb-8 border-b border-teal-600">
+            {/* Story Card 1 */}
+            <div className="travel-story-card grid grid-cols-1 md:grid-cols-12 gap-4 sm:gap-6 items-center pb-6 sm:pb-8 border-b border-teal-600">
               <div className="md:col-span-3 order-2 md:order-1">
                 <div
                   className="bg-gray-300 rounded-lg h-24 sm:h-28 md:h-32 w-full bg-center bg-cover"
@@ -161,14 +234,18 @@ export default function TravelStory() {
                 </button>
               </div>
               <div className="md:col-span-3 order-1 md:order-3">
-                <div className="text-5xl sm:text-6xl font-bold text-white">01</div>
+                <div className="text-5xl sm:text-6xl font-bold text-white">
+                  01
+                </div>
               </div>
             </div>
 
             {/* Story Card 2 */}
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-4 sm:gap-6 items-center">
+            <div className="travel-story-card grid grid-cols-1 md:grid-cols-12 gap-4 sm:gap-6 items-center">
               <div className="md:col-span-3 order-2 md:order-1">
-                <div className="text-5xl sm:text-6xl font-bold text-white">02</div>
+                <div className="text-5xl sm:text-6xl font-bold text-white">
+                  02
+                </div>
               </div>
               <div className="md:col-span-6 order-3 md:order-2">
                 <h3 className="text-xl sm:text-2xl font-bold text-white mb-2 sm:mb-3">
@@ -192,9 +269,10 @@ export default function TravelStory() {
               </div>
             </div>
           </div>
-          {/* Background Text */}
         </div>
-        <div className="absolute right-0 top-550 text-gray-800 opacity-10 font-bold text-[8rem] sm:text-[10rem] md:text-[12rem] lg:text-[16rem] leading-none pointer-events-none hidden sm:block ">
+
+        {/* Background Text */}
+        <div className="travel-bg-text absolute right-0 text-gray-800 opacity-10 font-bold text-[8rem] sm:text-[10rem] md:text-[12rem] lg:text-[16rem] leading-none pointer-events-none hidden sm:block">
           Trav
         </div>
       </div>

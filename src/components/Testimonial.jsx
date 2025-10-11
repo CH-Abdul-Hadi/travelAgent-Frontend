@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   ChevronLeft,
   ChevronRight,
@@ -6,9 +6,18 @@ import {
   Quote,
   ArrowUpRight,
 } from "lucide-react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function Testimonial() {
   const [currentIndex, setCurrentIndex] = useState(0);
+
+  const headerRef = useRef(null);
+  const imageRef = useRef(null);
+  const cardsRef = useRef([]);
+  const btnsRef = useRef(null);
 
   const testimonials = [
     {
@@ -41,6 +50,42 @@ export default function Testimonial() {
     );
   };
 
+  // GSAP Animations
+  useEffect(() => {
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: headerRef.current,
+        start: "top 85%",
+      },
+    });
+
+    tl.from(headerRef.current, {
+      opacity: 0,
+      y: 60,
+      duration: 1,
+      ease: "power3.out",
+    })
+      .from(imageRef.current, {
+        opacity: 0,
+        x: -100,
+        duration: 1,
+        ease: "power3.out",
+      })
+      .from(cardsRef.current, {
+        opacity: 0,
+        x: 100,
+        duration: 1,
+        stagger: 0.3,
+        ease: "power3.out",
+      })
+      .from(btnsRef.current, {
+        opacity: 0,
+        scale: 0.9,
+        duration: 0.8,
+        ease: "back.out(1.7)",
+      });
+  }, []);
+
   return (
     <div
       className="min-h-screen bg-white py-12 px-4 sm:px-6 md:py-16 lg:px-8"
@@ -48,7 +93,7 @@ export default function Testimonial() {
     >
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="mb-10 md:mb-12">
+        <div ref={headerRef} className="mb-10 md:mb-12">
           <p className="text-sm text-gray-500 uppercase tracking-wide mb-3 md:mb-4 text-center lg:text-left">
             Travel & Tourism Agency
           </p>
@@ -87,7 +132,7 @@ export default function Testimonial() {
         {/* Content Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8">
           {/* Left Side - Image */}
-          <div className="lg:col-span-5 order-1 lg:order-none">
+          <div className="lg:col-span-5 order-1 lg:order-none" ref={imageRef}>
             <div
               className="bg-gray-300 rounded-2xl h-64 sm:h-80 md:h-96 lg:h-full bg-center bg-cover"
               style={{ backgroundImage: "url('/beach5.jpg')" }}
@@ -102,30 +147,26 @@ export default function Testimonial() {
               <div className="flex flex-col md:flex-row gap-6 overflow-hidden">
                 {testimonials
                   .slice(currentIndex, currentIndex + 2)
-                  .map((testimonial) => (
+                  .map((testimonial, index) => (
                     <div
                       key={testimonial.id}
+                      ref={(el) => (cardsRef.current[index] = el)}
                       className="flex-shrink-0 w-full md:w-[calc(50%-12px)] bg-gray-100 rounded-2xl p-6 sm:p-8 relative"
                     >
-                      {/* Quote Icon */}
                       <Quote className="absolute top-5 right-5 w-10 h-10 sm:w-12 sm:h-12 text-gray-300" />
 
-                      {/* Title */}
                       <div className="text-teal-600 font-semibold mb-2">
                         {testimonial.title}
                       </div>
 
-                      {/* Name */}
                       <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3 sm:mb-4">
                         {testimonial.name}
                       </h3>
 
-                      {/* Review */}
                       <p className="text-gray-600 mb-5 sm:mb-6 leading-relaxed text-sm sm:text-base">
                         {testimonial.review}
                       </p>
 
-                      {/* Star Rating */}
                       <div className="flex gap-1">
                         {[...Array(testimonial.rating)].map((_, i) => (
                           <Star
@@ -139,7 +180,10 @@ export default function Testimonial() {
               </div>
 
               {/* Navigation Buttons */}
-              <div className="flex gap-3 mt-6 sm:mt-8 justify-center md:justify-start">
+              <div
+                ref={btnsRef}
+                className="flex gap-3 mt-6 sm:mt-8 justify-center md:justify-start"
+              >
                 <button
                   onClick={prevSlide}
                   className="w-10 h-10 sm:w-12 sm:h-12 bg-white hover:bg-gray-100 border-2 border-gray-300 rounded-full flex items-center justify-center transition-colors"
