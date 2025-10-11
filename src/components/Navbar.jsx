@@ -47,33 +47,33 @@ const Navbar = () => {
   return (
     <header className="w-full bg-white shadow-sm">
       {/* Top bar */}
-      <div className="hidden md:flex justify-between items-center text-sm px-8 py-2 border-b bg-gray-50">
+      <div className="hidden md:flex justify-between items-center text-sm px-4 md:px-8 py-2 border-b bg-gray-50">
         {/* Social Links */}
-        <div className="flex gap-4 text-gray-600">
+        <div className="flex gap-2 md:gap-4 text-gray-600">
           {socialLinks.map((social) => (
             <a
               key={social.name}
               href={social.url}
               className="hover:text-teal-600 flex items-center gap-1 transition-colors"
             >
-              <social.icon /> {social.name}
+              <social.icon /> <span className="hidden lg:inline">{social.name}</span>
             </a>
           ))}
         </div>
 
         {/* Contact Info */}
-        <div className="flex gap-6 text-gray-600">
+        <div className="flex gap-3 md:gap-6 text-gray-600 text-xs md:text-sm">
           <span>{contact.phone}</span>
-          <span>{contact.email}</span>
+          <span className="hidden md:inline">{contact.email}</span>
         </div>
       </div>
 
       {/* Main navbar */}
-      <div className="flex justify-between items-center px-11 py-4">
+      <div className="flex justify-between items-center px-4 md:px-8 lg:px-11 py-4">
         {/* Logo */}
         <div>
-          <h1 className="text-2xl font-bold text-gray-800">{brand.name}</h1>
-          <p className="text-sm text-gray-500">{brand.tagline}</p>
+          <h1 className="text-xl md:text-2xl font-bold text-gray-800">{brand.name}</h1>
+          <p className="text-xs md:text-sm text-gray-500">{brand.tagline}</p>
         </div>
 
         {/* Desktop Nav links */}
@@ -92,8 +92,7 @@ const Navbar = () => {
             <button className="ml-4 bg-teal-700 text-white px-4 py-2 rounded-full hover:bg-teal-800 transition-colors">
               {ctaButton.text}
             </button>
-            </Link>
-          
+        </Link>
         </nav>
 
         {/* Mobile menu button */}

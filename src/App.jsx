@@ -8,7 +8,8 @@ import TravelStory from "./components/TravelStory";
 import Destination from "./components/Destination";
 import Testimonial from "./components/Testimonial";
 import Footer from "./components/Footer";
-import GetInTouch from "./components/getInTouch"; // ✅ Capitalized name for consistency
+import GetInTouch from "./components/GetInTouch"; // ✅ Capitalized name for consistency
+import NotFound from "./components/Pagenotfound";
 
 const App = () => {
   return (
@@ -34,7 +35,7 @@ const App = () => {
         {/* Get In Touch Page */}
         <Route path="/get-in-touch" element={<GetInTouch />} />
 
-        <Route path="*" element={"404 Page not found"} />
+        <Route path="*" element={<NotFound/>} />
 
       </Routes>
 
