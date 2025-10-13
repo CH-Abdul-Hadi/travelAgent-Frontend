@@ -168,7 +168,7 @@ export default function Footer() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 mb-12">
             {/* Brand Section */}
             <div className="lg:col-span-2">
-              <h2 className="text-4xl font-bold mb-2">Veltour</h2>
+              <h2 className="text-4xl font-bold mb-2">HH Travels</h2>
               <p className="text-teal-200 mb-8">Travel & Tour</p>
 
               {/* Small Gallery */}
@@ -265,7 +265,7 @@ export default function Footer() {
           {/* Copyright */}
           <div className="border-t border-teal-600 pt-8 text-center footer-copy">
             <p className="text-teal-200 text-sm">
-              © 2025 Veltour | Powered by Sanstive
+              © 2025 HH Travels | Powered by Sanstive
             </p>
           </div>
         </div>

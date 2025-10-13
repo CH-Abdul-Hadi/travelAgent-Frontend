@@ -5,8 +5,8 @@ import gsap from "gsap";
 
 const Hero = () => {
   const brandTag = {
-    name: "Veltour",
-    subtitle: "Travel & Tourism Agency Website",
+    name: "HH Travels",
+    subtitle: "Your Global Journey Start Here",
   };
 
   const heroContent = {

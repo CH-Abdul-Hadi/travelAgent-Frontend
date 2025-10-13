@@ -15,7 +15,7 @@ const Navbar = () => {
 
   // Brand Information
   const brand = {
-    name: "Veltour",
+    name: "HH Travels",
     tagline: "Travel & Tour",
   };
 
@@ -48,12 +48,12 @@ const Navbar = () => {
     url: "/get-in-touch",
   };
 
-  // ========== END EASY EDIT SECTION ==========
+  // ========== END EASY EDIT SECTION ==========//
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <header className="w-full bg-white shadow-sm">
+    <header className="w-full bg-teal-700 shadow-sm">
       {/* Top bar */}
       <div className="hidden md:flex justify-between items-center text-sm px-4 md:px-8 py-2 border-b bg-gray-50">
         {/* Social Links */}
@@ -81,14 +81,17 @@ const Navbar = () => {
       <div className="flex justify-between items-center px-4 md:px-8 lg:px-11 py-4">
         {/* Logo */}
         <div>
-          <h1 className="text-xl md:text-2xl font-bold text-gray-800">
+          <Link to="/" >
+          {/* <h1 className="text-xl md:text-2xl font-bold text-gray-800">
             {brand.name}
           </h1>
-          <p className="text-xs md:text-sm text-gray-500">{brand.tagline}</p>
+          <p className="text-xs md:text-sm text-gray-500">{brand.tagline}</p> */}
+          <img src="/logo.png" className="w-42 h-18" alt="" />
+          </Link>
         </div>
 
         {/* Desktop Nav links */}
-        <nav className="hidden lg:flex items-center gap-6 text-gray-700">
+        <nav className="hidden lg:flex items-center gap-6  text-white">
           {navItems.map((item) => (
             <HashLink
               key={item.name}
@@ -101,7 +104,7 @@ const Navbar = () => {
           ))}
 
           <Link to={ctaButton.url}>
-            <button className="ml-4 bg-teal-700 text-white px-4 py-2 rounded-full hover:bg-teal-800 transition-colors">
+            <button className="ml-4 bg-teal-70 bg-white  text-black px-4 py-2 rounded-full hover:bg-teal-800 transition-colors">
               {ctaButton.text}
             </button>
           </Link>
