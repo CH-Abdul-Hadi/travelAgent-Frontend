@@ -78,7 +78,7 @@ const Navbar = () => {
       </div>
 
       {/* Main navbar */}
-      <div className="flex justify-between items-center px-4 md:px-8 lg:px-11 py-4">
+      <div className="flex justify-between items-center px-4 md:px-8 lg:px-8 py-4">
         {/* Logo */}
         <div>
           <Link to="/" >
@@ -86,7 +86,7 @@ const Navbar = () => {
             {brand.name}
           </h1>
           <p className="text-xs md:text-sm text-gray-500">{brand.tagline}</p> */}
-          <img src="/logo.png" className="w-42 h-18" alt="" />
+          <img src="/logo.png" className="w-32 " alt="" />
           </Link>
         </div>
 
