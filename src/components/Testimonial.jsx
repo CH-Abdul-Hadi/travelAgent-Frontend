@@ -22,18 +22,26 @@ export default function Testimonial() {
   const testimonials = [
     {
       id: 1,
-      name: "Jarina Patel",
-      title: "Honeymoon & Luxury",
+      name: "Sarah & David Chen",
+      title: "Family Getaway",
       review:
-        "Veltour made our dream honeymoon to the Maldives absolutely perfect! Every detail was flawlessly arranged, and the experience exceeded all our expectations. We couldn't be happier!",
+        "We booked the 'European Capitals' tour for our family of four, and it was seamless. Everything, from the flights to the hotel accommodations, was handled perfectly. The guided tours were engaging for both us and the kids. Veltour took all the stress out of planning a major trip! A fantastic experience we'll cherish forever.",
       rating: 5,
     },
     {
       id: 2,
-      name: "Alex Thompson",
-      title: "Solo & Adventure",
+      name: "Liam O'Connell",
+      title: "Luxury Honeymoon",
       review:
-        "Booking my solo adventure through Southeast Asia with Veltour was the best decision! Their local guides were incredible, and the itinerary was perfectly balanced between culture and adventure. Highly recommended!",
+        "Our honeymoon to the Maldives was absolutely magical, thanks to Veltour's luxury package. They truly catered to every request, and the private overwater bungalow was breathtaking. The local concierge service was top-notch, arranging dinner reservations and excursions with ease. Worth every penny!",
+      rating: 5,
+    },
+    {
+      id: 3,
+      name: "The Summit Seekers",
+      title: "Group Trekking",
+      review:
+        "The trek through the Himalayas was challenging, but the organization by Veltour was flawless. Our guide was extremely knowledgeable, safety-focused, and motivating. The itinerary was well-paced, and the accommodations along the way were comfortable. Highly recommend Veltour for serious adventurers!",
       rating: 5,
     },
   ];

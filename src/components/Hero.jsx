@@ -40,23 +40,23 @@ const Hero = () => {
       const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
 
       // --- 1. Intro Animation ---
-      tl.fromTo(heroRef.current, { opacity: 0 }, { opacity: 1, duration: 0.5 })
+      tl.fromTo(heroRef.current, { opacity: 0 }, { opacity: 1, duration: 0.7 })
         .fromTo(
           titleRef.current,
           { y: 60, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.8, ease: "power4.out" },
+          { y: 0, opacity: 1, duration: 0.9, ease: "power4.out" },
           "-=0.3"
         )
         .fromTo(
           descRef.current,
           { y: 40, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.7 },
+          { y: 0, opacity: 1, duration: 0.8 },
           "-=0.6"
         )
         .fromTo(
           [buttonRef.current, mainButtonRef.current],
           { scale: 0.6, opacity: 0 },
-          { scale: 1, opacity: 1, duration: 0.6, ease: "back.out(1.8)" },
+          { scale: 1, opacity: 1, duration: 0.7, ease: "back.out(1.8)" },
           "-=0.5"
         );
 
@@ -65,13 +65,13 @@ const Hero = () => {
         .fromTo(
           rightWidgetsRef.current,
           { x: 80, opacity: 0 },
-          { x: 0, opacity: 1, duration: 1, ease: "power4.out" },
+          { x: 0, opacity: 1, duration: 1.2, ease: "power4.out" },
           "widgetsIn"
         )
         .fromTo(
           [cardRef.current, bottomCardRef.current],
           { opacity: 0 },
-          { opacity: 1, duration: 0.5, stagger: 0.1 },
+          { opacity: 1, duration: 0.6, stagger: 0.1 },
           "widgetsIn+=0.2"
         );
 
@@ -86,7 +86,7 @@ const Hero = () => {
         ],
         {
           scale: 1.02,
-          duration: 0.2,
+          duration: 0.3,
           ease: "sine.out",
           yoyo: true,
           repeat: 1,
@@ -101,7 +101,7 @@ const Hero = () => {
         gsap.to(mainButtonRef.current, {
           scale: 1.12,
           rotation: 45,
-          duration: 0.3,
+          duration: 0.4,
           ease: "power2.out",
         });
       };
@@ -109,7 +109,7 @@ const Hero = () => {
         gsap.to(mainButtonRef.current, {
           scale: 1,
           rotation: 0,
-          duration: 0.3,
+          duration: 0.4,
           ease: "power2.out",
         });
       };
@@ -119,7 +119,7 @@ const Hero = () => {
         gsap.to(buttonRef.current, {
           scale: 1.08,
           boxShadow: "0 10px 20px rgba(0,0,0,0.15)",
-          duration: 0.25,
+          duration: 0.3,
           ease: "power2.out",
         });
       };
@@ -127,7 +127,7 @@ const Hero = () => {
         gsap.to(buttonRef.current, {
           scale: 1,
           boxShadow: "0 4px 10px rgba(0,0,0,0.1)",
-          duration: 0.25,
+          duration: 0.2,
           ease: "power2.out",
         });
       };
